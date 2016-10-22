@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script type="text/javascript" src="read_localfile.js"></script>
+		<script type="text/javascript">
+			sayHello();
+		</script>
+
+<!--  ----------------------------------------_ -->
+		<script type="text/javascript">
+		  // Check for the various File API support.
+                  if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    // Great success! All the File APIs are supported.
+                  } else {
+                    alert('The File APIs are not fully supported in this browser.');
+                  }
+		</script>
+
+<!--  ----------------------------------------_ -->
+
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+
+
+
+<!--  ----------------------------------------_ -->
+<style>
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
+</style>
+
+<input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+
+<!--  ----------------------------------------_ -->
+<script>
+//http://stackoverflow.com/questions/14446447/javascript-read-local-text-file
+function readTextFile(file)
+{
+	//
+	document.write("entered readTextFile() ");
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+	//
+	document.write("after open ");
+    rawFile.onreadystatechange = function ()
+    {
+	//
+	document.write("entered func ");
+        if(rawFile.readyState === 4)
+        {
+	//
+	document.write("entered rawFile.readyState ");
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                var allText = rawFile.responseText;
+                alert(allText);
+            }
+        }
+    }
+    rawFile.send(null);
+}
+
+readTextFile("file:///home/gauthama/gau_tmp.txt");//("file:///C:/your/path/to/file.txt");
+</script>
+
+<!-- -----------------------------------------_ -->
+<br>
+<!-- http://stackoverflow.com/questions/14446447/javascript-read-local-text-file-->
+
+<!-- http://www.javascripture.com/FileReader -->
+<input type='file' accept='text/plain' onchange='openFile(event)'><br>
+<div id='output'> </div>
+<script>
+  var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var text = reader.result;
+      console.log(reader.result.substring(0, 200));
+    };
+    reader.readAsText(input.files[0]);
+  };
+</script>
+
+
+<!--  ----------------------------------------_ -->
+	</head>
+    <body>
+	      
+    </body>
+</html>	
+

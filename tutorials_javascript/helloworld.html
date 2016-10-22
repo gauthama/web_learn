@@ -1,0 +1,84 @@
+<html>
+	<head>
+		<script type="text/javascript" src="hello_script.js"></script>
+		<script type="text/javascript">
+			sayHello();
+		</script>
+		
+		<script type="text/javascript">
+            window.onerror = function (msg, url, line) {
+               alert("Message : " + msg );
+               alert("url : " + url );
+               alert("Line number : " + line );
+            }
+        </script>
+		
+		<!-- FIXME If the following is not commented, 
+		     the url and line no info is not displayed.
+		<img src="myimage.gif" onerror="alert('Error occurred when loading the image.')" />
+		-->
+		
+	</head>
+    <body>
+		<script>
+			sayName('Zara', 8);
+			sayName('Zara', 9);	
+			full_name = concatenate("Suzuki","Access");
+			document.write(full_name);
+			DOM_type = check_DOM_compatibility();
+			document.write(DOM_type);
+			test_exception_handling(0);
+		</script>
+	      
+	<!-- To test onerror -->
+	<form>
+        <input type="button" onclick="myFunc();" value="Click Me"/>
+    </form>
+	
+	<form> 
+		<!-- FIXME Clicking on the following button replaces 
+		     existing contents in the browser -->
+		<input type="button" onclick="sayHello()" value="Say Hello..." />
+	</form>
+	
+	<form  name="myForm" onsubmit="form_input_validation();validate_email();">
+        <table cellspacing="2" cellpadding="2" border="1">
+            
+            <tr>
+				<td align="right">Name</td>
+				<td><input type="text" name="Name" /></td>
+            </tr>
+            
+            <tr>
+				<td align="right">EMail</td>
+				<td><input type="text" name="EMail" /></td>
+            </tr>
+            
+            <tr>
+				<td align="right">Zip Code</td>
+				<td><input type="text" name="Zip" /></td>
+            </tr>
+            
+            <tr>
+				<td align="right">Country</td>
+				<td>
+					<select name="Country">
+						<option value="-1" selected>[choose yours]</option>
+						<option value="1">USA</option>
+						<option value="2">UK</option>
+						<option value="3">INDIA</option>
+					</select>
+               </td>
+            </tr>
+            
+            <tr>
+				<td align="right"></td>
+				<td><input type="submit" value="Submit" /></td>
+            </tr>
+            
+        </table>
+    </form>
+			
+    </body>
+   
+</html>
