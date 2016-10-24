@@ -1,0 +1,34 @@
+<!-- plot for csv data -->
+<html>
+<head>
+<script type="text/javascript"
+  src="dygraph-combined-dev.js"></script>
+</head>
+<body>
+<div id="graphdiv"></div>
+<script type="text/javascript">
+    
+  var csv_data = "Date,Temperature\n" +
+    "2008-05-07,75\n" +
+    "2008-05-08,70\n" +
+    "2008-05-09,80\n";
+    
+    console.log('hello');
+
+  g = new Dygraph(
+    // containing div
+    document.getElementById("graphdiv"),
+    
+    // CSV or path to a CSV file.
+    //"Date,Temperature\n" +
+    //"2008-05-07,75\n" +
+    //"2008-05-08,70\n" +
+    //"2008-05-09,80\n" 
+    //"dygraph_test.csv"
+    csv_data
+
+  );
+</script>
+</body>
+</html>
+
