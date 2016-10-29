@@ -6,8 +6,8 @@ var util = require('util');
 
 require('colors');
 
-require('dygraphs');
-require('CanvasRenderingContext2D');
+//require('dygraphs');
+//require('CanvasRenderingContext2D');
 
 var yahooFinance = require('yahoo-finance');
 
