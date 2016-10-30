@@ -1,3 +1,6 @@
+Installation
+$ npm install yahoo-finance
+
 Source: https://github.com/pilwon/node-yahoo-finance/
  	examples/callback/historical-multiple.js 
 	examples/callback/historical-single.js 
