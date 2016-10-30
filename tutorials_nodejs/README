@@ -1,0 +1,5 @@
+Source: Uses library from https://github.com/pilwon/node-yahoo-finance/
+ 	examples/callback/historical-multiple.js 
+	examples/callback/historical-single.js 
+	examples/callback/snapshot-multiple.js 	
+	examples/callback/snapshot-single.js 	
