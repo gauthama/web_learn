@@ -10,3 +10,7 @@ Source: https://github.com/pilwon/node-yahoo-finance/
 Relavant files: (uses above examples)
     pilwon_hist_single_wjson.js
     pilwon_historical_single.js
+
+===
+Library for Google finance by same author
+https://github.com/pilwon/node-google-finance
