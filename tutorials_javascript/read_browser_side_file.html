@@ -1,15 +1,15 @@
 <html>
   <head>
   <script>
-    var openFile = function(event) {
+    var openFile = function(event) { 
       var input = event.target;
       var reader = new FileReader();
-      reader.onload = function(){
+      reader.onload = function(){   //gets called after readAsText()
         var text = reader.result;
         var node = document.getElementById('output');
-        node.innerHTML = text;
+        node.innerText = text;
       };
-      reader.readAsText(input.files[0]);
+      reader.readAsText(input.files[0]);//if success, calls reader.onload()
     };
   </script>
   </head>
