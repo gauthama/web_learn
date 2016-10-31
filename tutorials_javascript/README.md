@@ -1,5 +1,6 @@
 #Installation:  
 Refer http://dygraphs.com/download.html
+
    $ npm install dygraphs
 
 #Relevant files:
