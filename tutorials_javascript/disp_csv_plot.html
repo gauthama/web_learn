@@ -1,0 +1,95 @@
+<!-- <script type="text/javascript" src="dygraph-combined-dev.js"> </script> -->
+
+<script type="text/javascript">
+
+
+function convert_month_to_numstr(month) {
+    //Input: MMM, Output: MM
+    var months = {
+        'JAN' : '01', 'FEB' : '02', 'MAR' : '03', 'APR' : '04',
+        'MAY' : '05', 'JUN' : '06', 'JUL' : '07', 'AUG' : '08',
+        'SEP' : '09', 'OCT' : '10', 'NOV' : '11', 'DEC' : '12'};
+    return months[month]; 
+    
+}
+
+function process_date(date_str) {
+    // Input format: 24-Oct-2016
+    // Output format:YYYY-MM-DD
+    var input = date_str.split('-');
+    var output = new Array();
+    output[0] = input[2];
+    output[1] = convert_month_to_numstr(input[1].toUpperCase());
+    output[2] = input[0];
+    return output[0] + '-' + output[1] + '-' + output[2];
+}
+
+function trim_csv_text(csv_text) {
+    var csv_text_trimmed='';
+    var rows = csv_text.split("\n");
+    for (var i = 1; i < rows.length; i++) { //skip first row
+        var cells = rows[i].split(",");
+        for (var j = 2; j < cells.length; j++) {
+            var cell = (cells[j]).replace(/"/g,'');
+            if (j === 2) {                  // skip 1st and 2nd columns
+                cell = process_date(cell);
+            }
+            //console.log('Cell:', cell);
+            csv_text_trimmed.concat(cell,',');
+        }
+        if (i < rows.length - 1) {
+            csv_text_trimmed.concat('\n');
+        }
+    }
+    
+    localStorage.setItem('csv_text', csv_text_trimmed);
+    return csv_text_trimmed;
+}
+
+function Upload() {
+    var fileUpload = document.getElementById("fileUpload");
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+    if (regex.test(fileUpload.value.toLowerCase())) {
+        if (typeof (FileReader) != "undefined") {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var table = document.createElement("table");
+                var rows = e.target.result.split("\n");
+                for (var i = 0; i < rows.length; i++) {
+                    var row = table.insertRow(-1);
+                    var cells = rows[i].split(",");
+                    for (var j = 0; j < cells.length; j++) {
+                       var cell = row.insertCell(-1);
+                       cell.innerHTML = (cells[j]).replace(/"/g,'');
+                    }
+                }
+                var dvCSV = document.getElementById("dvCSV");
+                dvCSV.innerHTML = "";
+                dvCSV.appendChild(table);
+                table.setAttribute("border", "1");
+                //
+                csv_text = (e.target.result).replace(/"/,'');
+                csv_text_trimmed = trim_csv_text(csv_text);
+                //console.log(csv_text);
+                console.log(csv_text_trimmed);
+                //g = new Dygraph(document.getElementById("graphdiv"),
+                //                csv_text_trimmed);
+            }
+            reader.readAsText(fileUpload.files[0]);
+        } else {
+            alert("This browser does not support HTML5.");
+        }
+    } else {
+        alert("Please upload a valid CSV file.");
+    }
+}
+</script>
+
+<input type="file" id="fileUpload" accept='.csv' onchange='Upload(event)'/>
+<hr />
+
+<div id="graphdiv"></div>
+
+<hr />
+<div id="dvCSV">
+</div>
