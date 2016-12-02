@@ -1,0 +1,42 @@
+<html>
+<head>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.min.js"></script>
+<script type="text/javascript" src="tablesort.js"></script>
+</head>
+<body ng-app="myApp">
+<div>
+  <div ng-controller="PurchasesCtrl">
+    <h2>Purchases:</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th ng-click="changeSorting('username')">
+            UserName
+            <i class="glyphicon" ng-class="getIcon('username')">
+        </i>
+          </th>
+          <th ng-click="changeSorting('usertype')">
+            UserType
+            <i class="glyphicon" ng-class="getIcon('usertype')">
+          </i>
+          </th>
+          <th ng-click="changeSorting('age')">
+            Age
+            <i class="glyphicon" ng-class="getIcon('age')">
+          </i>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="purchase in purchases.data | orderBy:sort.active:sort.descending">
+          <td>{{purchase.username}}</td>
+          <td>{{purchase.usertype}}</td>
+          <td>{{purchase.age}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
